@@ -21,6 +21,7 @@ namespace Tiled
         int cols  = atlas.child("tileset").attribute("columns").as_int();
 
         // create the tile array
+        // https://stackoverflow.com/questions/751878/determine-array-size-in-constructor-initializer
         _tiles = (Tile*) calloc(count, sizeof(Tile));
         assert(_tiles);
         // populate said array
@@ -58,11 +59,16 @@ namespace Tiled
         return _size;
     }
 
-    void Set::copyTile(int id, int x, int y, float scale)
+    void Set::copyTile(int id, int x, int y)
     {
-        SDL_Rect wc = _tiles[id].getWC(x, y, scale);
+        SDL_Rect wc = _tiles[id].getWC(x, y);
         SDL_RenderCopy(_renderer, _atlas, _tiles[id].getUV(), &wc);
     };
+
+    Tile Set::getTile(int id)
+    {
+        return _tiles[id];
+    }
 
     void Set::render()
     {

@@ -27,8 +27,11 @@ private:
 class Camera
 {
 public:
-    Camera(int w, int h, float scale, int x, int y);
+    Camera(int mw, int mh, float scale, int ww, int wh);
     SDL_Rect* getViewport();
+
+    float getScale();
 private:
     SDL_Rect _rect;
+    int _ww, _wh, _scale;
 };

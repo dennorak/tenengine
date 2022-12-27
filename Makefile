@@ -24,7 +24,8 @@ ENGINE = $(wildcard src/tenengine/*.cpp)
 TILED = $(wildcard src/tenengine/tiled/*.cpp)
 GRAPHICS = $(wildcard src/tenengine/graphics/*.cpp)
 INPUT = $(wildcard src/tenengine/input/*.cpp)
-ALL = $(LAUNCHER) $(ENGINE) $(TILED) $(GRAPHICS) $(INPUT)
+ENTITY = $(wildcard src/tenengine/entity/*.cpp)
+ALL = $(LAUNCHER) $(ENGINE) $(TILED) $(GRAPHICS) $(INPUT) $(ENTITY)
 
 ### Define routines ####
 
@@ -64,5 +65,9 @@ $(call OBJ_OF, $(GRAPHICS)): $(GRAPHICS)
 	$(CC) $(CFLAGS) -o $@ -c $(call SRC_OF, $@)
 
 $(call OBJ_OF, $(INPUT)): $(INPUT)
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -o $@ -c $(call SRC_OF, $@)
+
+$(call OBJ_OF, $(ENTITY)): $(ENTITY)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -o $@ -c $(call SRC_OF, $@)

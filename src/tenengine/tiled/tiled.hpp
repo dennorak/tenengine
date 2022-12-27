@@ -16,7 +16,7 @@ namespace Tiled
         Tile(int tx, int ty, int size, bool collidable);
 
         SDL_Rect* getUV();
-        SDL_Rect getWC(int wx, int wy, float scale);
+        SDL_Rect getWC(int wx, int wy);
     private:
         SDL_Rect _uv;
         SDL_Rect _wc;
@@ -29,9 +29,10 @@ namespace Tiled
         Set(std::string atlas_path, SDL_Renderer* renderer, std::string image_path);
         ~Set();
 
-        void copyTile(int id, int x, int y, float scale);
+        void copyTile(int id, int x, int y);
         void render();
         int getSize();
+        Tile getTile(int id);
     private:
         int _size;
         std::string _name;
@@ -44,15 +45,21 @@ namespace Tiled
     {
     public:
         Map(Set set, std::string path, SDL_Renderer* renderer, int w);
+        ~Map();
 
         void render(SDL_Rect *of, int layer, SDL_Rect *to);
         float getScale();
         int width();
         int height();
+        int spawnX();
+        int spawnY();
+
+        int getTileID(int layer, int tx, int ty);
     private:
         int _w, _h, _layers, _spawnX, _spawnY;
         float _scale;
         SDL_Texture *_textures[1];
+        int *_tiles;
         SDL_Renderer* _renderer;
     };    
 }

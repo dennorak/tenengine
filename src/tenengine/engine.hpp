@@ -1,6 +1,7 @@
 #pragma once
 #include "tiled/tiled.hpp"
 #include "graphics/graphics.hpp"
+#include "entity/entity.hpp"
 #include "input/input.hpp"
 #include "common.h"
 
@@ -27,4 +28,5 @@ private:
     // temp
     Tiled::Map _map;
     Camera _camera;
+    Player _player;
 };

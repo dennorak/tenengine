@@ -15,14 +15,22 @@ namespace Tiled
         _h = atlas.child("map").attribute("height").as_int();
         _layers = atlas.child("map").attribute("nextlayerid").as_int() - 1;
         _scale = atlas.child("map").child("properties")
-            .find_child_by_attribute("property", "name", "scale").
-            attribute("value").as_float();
+            .find_child_by_attribute("property", "name", "scale")
+            .attribute("value").as_float();
         _spawnX = atlas.child("map").child("properties")
-            .find_child_by_attribute("property", "name" "spawn_x").
-            attribute("value").as_int();
+            .find_child_by_attribute("property", "name", "spawn_x")
+            .attribute("value").as_int();
         _spawnY = atlas.child("map").child("properties")
-            .find_child_by_attribute("property", "name" "spawn_y").
-            attribute("value").as_int();
+            .find_child_by_attribute("property", "name", "spawn_y")
+            .attribute("value").as_int();
+
+        // create the tile array
+        // for more info see the creation of the _tiles array in set.cpp
+        // https://stackoverflow.com/questions/47664127/create-a-multidimensional-array-dynamically-in-c
+        _tiles = (int*) calloc(_w * _h * _layers, sizeof(int));
+        assert(_tiles);
+        // set the tile index to 0
+        int tCount = 0;
 
         // bake the textures
         for (int i = 0; i < _layers; i++)
@@ -33,12 +41,11 @@ namespace Tiled
                 .child_value("data"));
             
             // convert layer data to an array
-            int tiles[_w * _h];
             std::string line;
-            int tCount = 0;
+            // parse the csv data
             while (std::getline(layout, line, ','))
             {
-                tiles[tCount] = stoi(line);
+                _tiles[tCount * (i + 1)] = stoi(line);
                 tCount++;
             };
             
@@ -50,7 +57,7 @@ namespace Tiled
             {
                 for (int x = 0; x < _w; x++)
                 {
-                    set.copyTile(tiles[tile], x, y, 1); // this might cause an error later
+                    set.copyTile(_tiles[tile * (i + 1)], x, y);
                     tile++;
                 }
             }
@@ -67,6 +74,20 @@ namespace Tiled
         SDL_RenderCopy(_renderer, _textures[layer-1], of, to);
     }
 
+    int Map::getTileID(int layer, int tx, int ty)
+    {
+        // convert (x, y) to array position
+        // for info see the creation for the _tiles array
+        return _tiles[((_w * (ty - 1)) + (tx - 1))*layer];
+    };
+
+    Map::~Map()
+    {
+        // free the tile array
+        free(_tiles);
+        _tiles = NULL;
+    };
+
     float Map::getScale()
     {
         return _scale;
@@ -80,5 +101,15 @@ namespace Tiled
     int Map::height()
     {
         return _h;
+    }
+
+    int Map::spawnX()
+    {
+        return _spawnX;
+    }
+
+    int Map::spawnY()
+    {
+        return _spawnY;
     }
 }

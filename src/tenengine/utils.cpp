@@ -4,6 +4,7 @@
 void err(std::string message)
 {
     std::cout << "[ ERROR ]: " << message << std::endl;
+    SDL_Quit();
     exit(1);
 };
 

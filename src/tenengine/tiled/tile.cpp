@@ -24,13 +24,11 @@ namespace Tiled
         return &_uv;
     }
 
-    SDL_Rect Tile::getWC(int wx, int wy, float scale)
+    SDL_Rect Tile::getWC(int wx, int wy)
     {
         SDL_Rect rect = _wc;
-        rect.w *= scale;
-        rect.h *= scale;
-        rect.x *= wx * scale;
-        rect.y *= wy * scale;
+        rect.x *= wx;
+        rect.y *= wy;
         return rect;
     }
 }
