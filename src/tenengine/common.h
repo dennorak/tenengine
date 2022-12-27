@@ -7,10 +7,10 @@
 /*
     defs
 */
-#define PACKPATH "textures/atlas.tsx"
-#define MAPPATH "textures/demo.tmx"
-#define TEXPATH "textures/atlas.png"
-#define PLAYERTEX "textures/proto.png"
+#define PACKPATH "assets/data/atlas.teset"
+#define MAPPATH "assets/data/demo.temap"
+#define TEXPATH "assets/textures/atlas.png"
+#define PLAYERTEX "assets/textures/proto.png"
 
 /*
     utils.cpp

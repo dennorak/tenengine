@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.9" tiledversion="1.9.2" name="tenengine-base-atlas" tilewidth="32" tileheight="32" tilecount="3072" columns="64">
- <image source="atlas.png" width="2048" height="1536"/>
+ <image source="../textures/atlas.png" width="2048" height="1536"/>
  <tile id="0">
   <properties>
    <property name="collidable" type="bool" value="false"/>
