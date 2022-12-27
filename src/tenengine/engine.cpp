@@ -4,9 +4,9 @@
 Engine::Engine():
     _window("Tenengine"),
     _tiles(Tiled::Set(PACKPATH, _window.getRender(), TEXPATH)),
-    _map(Tiled::Map(_tiles, MAPPATH, _window.getRender(), _window.width())),
     _state(State::LOAD),
     _kb(),
+    _map(Tiled::Map(_tiles, MAPPATH, _window.getRender(), _window.width())),
     _camera(_map.width(), _map.height(), _map.getScale() * _tiles.getSize(), _window.width(), _window.height()),
     _player(PLAYERTEX, _map.spawnX(), _map.spawnY(), _window.getRender())
 {

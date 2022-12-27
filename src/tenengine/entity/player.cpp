@@ -10,6 +10,8 @@ Player::Player(std::string path, int x, int y, SDL_Renderer* renderer): _rendere
 
 void Player::render(int w, int h, float mapScale, float renderScale)
 {
+    //! the player doesn't spawn in the correct position.
+
     std::cout << renderScale << " " << mapScale << std::endl;
 
     SDL_Rect rect;
