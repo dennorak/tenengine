@@ -50,7 +50,7 @@ namespace Tiled
     Set::~Set()
     {
         // free the tile array
-        free(_tiles);
+        // free(_tiles);
         _tiles = NULL;
     };
 

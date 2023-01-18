@@ -1,58 +1,60 @@
 #include "engine.hpp"
-#include <SDL2/SDL_render.h>
 
 Engine::Engine():
-    _window("Tenengine"),
-    _tiles(Tiled::Set(PACKPATH, _window.getRender(), TEXPATH)),
-    _state(State::LOAD),
+    _window("tenengine"),
+    _gameState(EState::LOAD),
+    _playState(0),
+    _debug(_window.getRender()),
+    _showDebug(true), // NOTE: remove this from prod
     _kb(),
-    _map(Tiled::Map(_tiles, MAPPATH, _window.getRender(), _window.width())),
-    _camera(_map.width(), _map.height(), _map.getScale() * _tiles.getSize(), _window.width(), _window.height()),
-    _player(PLAYERTEX, _map.spawnX(), _map.spawnY(), _window.getRender())
+    _loadState(_window)
 {
-    dbg("Engine successfully initialized.");
-}
+    // init sdl
+    SDL_Init(SDL_INIT_EVERYTHING);
+    // load the state
+    _playStates.push_back(&_loadState);
+};
 
 void Engine::run()
 {
-    while (_state != State::EXIT)
+    int frameCount = 0;
+    while (_gameState != EState::EXIT)
     {
-        // poll the events
+        // tick block
         SDL_Event e;
         SDL_PollEvent(&e);
         switch (e.key.type)
         {
             case SDL_QUIT:
-                _state = State::EXIT;
+                _gameState = EState::EXIT;
                 break;
             case SDL_KEYDOWN:
-                _kb.keyPress(e.key.keysym.sym);
+                if (e.key.keysym.sym == SDLK_F3)
+                {
+                    _showDebug = !_showDebug;
+                } else _kb.keyPress(e.key.keysym.sym);
                 break;
             case SDL_KEYUP:
                 _kb.keyRelease(e.key.keysym.sym);
                 break;
         }
+        _playStates[_playState]->tick(_kb);
 
-        float PSPEED = 0.001f * _map.getScale();
+        float px = _playStates[_playState]->playerX();
+        float py = _playStates[_playState]->playerY();
 
-        // update the player
-        if (_kb.isKeyPressed(SDLK_w)) _player.move(0, -PSPEED);
-        if (_kb.isKeyPressed(SDLK_a)) _player.move(-PSPEED, 0);
-        if (_kb.isKeyPressed(SDLK_s)) _player.move(0, PSPEED);
-        if (_kb.isKeyPressed(SDLK_d)) _player.move(PSPEED, 0);
-
-        // TODO: Move the camera if the player is near the edge
-
-        // std::cout << "tile: " << _tiles.getSize() * _camera.getScale() * _map.getScale() << std::endl;
-
-        // render the screen
-        _map.render(_camera.getViewport(), 1, NULL);
-        _player.render(
-            _tiles.getSize(),
-            _tiles.getSize(),
-            _map.getScale(),
-            _camera.getScale()
-        );
+        // render block
+        SDL_RenderClear(_window.getRender());
+        _playStates[_playState]->render();
+        if (_showDebug) _debug.render(_window.getFPS(), px, py);
         SDL_RenderPresent(_window.getRender());
-    }
-}
+
+        // update frame ctr periodically
+        frameCount++;
+        if (frameCount >= 20)
+        {
+            _window.calcFPS(20);
+            frameCount = 0;
+        }
+    };
+};

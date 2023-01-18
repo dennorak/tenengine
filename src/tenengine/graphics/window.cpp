@@ -41,7 +41,7 @@ int Window::height()
     return _h;
 };
 
-void Window::calcFPS()
+void Window::calcFPS(int period)
 {
     static const int NUM_SAMPLES = 10;
     static float frameTime[NUM_SAMPLES];
@@ -66,6 +66,7 @@ void Window::calcFPS()
         frameTimeAvg += frameTime[i];
     }
     frameTimeAvg /= count;
+    frameTimeAvg /= period;
     if (frameTimeAvg > 0)
     {
         _fps = 1000.0f / frameTimeAvg;

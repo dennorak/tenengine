@@ -47,7 +47,7 @@ namespace Tiled
         Map(Set set, std::string path, SDL_Renderer* renderer, int w);
         ~Map();
 
-        void render(SDL_Rect *of, int layer, SDL_Rect *to);
+        void render(SDL_Rect *of, int layer);
         float getScale();
         int width();
         int height();

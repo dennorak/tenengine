@@ -1,23 +1,18 @@
 #include "graphics.hpp"
 
-
-Camera::Camera(int mw, int mh, float scale, int ww, int wh): _ww(ww), _wh(wh), _scale(scale)
+Camera::Camera(float scale, int w, int h, int cScale): _cScale(cScale)
 {
-    _rect.x = 0; // TODO: make the camera move
-    _rect.y = 0; // TODO: make the camera move
-    
-    float ar = (float)mh / (float)mw;
+    _rect.x = 0;
+    _rect.y = 0;
+    _rect.w = scale * _cScale;
 
-    _rect.w = scale;
-    _rect.h = ar*scale;
-}
+    float ar = (float)h/(float)w;
+    _rect.h = _rect.w * ar;
+};
 
-SDL_Rect* Camera::getViewport()
+SDL_Rect* Camera::getViewport(float x, float y)
 {
+    _rect.x = x * _cScale - (_rect.w/2) + 1;
+    _rect.y = y * _cScale - (_rect.h/2) + 1;
     return &_rect;
-}
-
-float Camera::getScale()
-{
-    return (float)_ww/_scale;
 }

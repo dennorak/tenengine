@@ -7,10 +7,9 @@
 /*
     defs
 */
-#define PACKPATH "assets/data/atlas.teset"
-#define MAPPATH "assets/data/demo.temap"
-#define TEXPATH "assets/textures/atlas.png"
+
 #define PLAYERTEX "assets/textures/proto.png"
+#define FONTPATH "assets/fonts/sofiasans.ttf"
 
 /*
     utils.cpp

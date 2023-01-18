@@ -1,11 +1,18 @@
 #pragma once
-#include "tiled/tiled.hpp"
-#include "graphics/graphics.hpp"
-#include "entity/entity.hpp"
-#include "input/input.hpp"
-#include "common.h"
 
-enum State {
+#include "common.h"
+#include "graphics/graphics.hpp"
+#include "tiled/tiled.hpp"
+#include "entity/entity.hpp"
+#include "state/state.hpp"
+#include "input/input.hpp"
+
+#include <vector>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+
+enum EState
+{
     LOAD,
     MENU,
     PLAY,
@@ -21,12 +28,13 @@ public:
     void run();
 private:
     Window _window;
-    Tiled::Set _tiles;
-    State _state;
+    EState _gameState;
+    std::vector<IState*> _playStates;
+    int _playState;
+    Debug _debug;
+    bool _showDebug;
     Keyboard _kb;
 
-    // temp
-    Tiled::Map _map;
-    Camera _camera;
-    Player _player;
+    // states
+    LoadState _loadState;
 };

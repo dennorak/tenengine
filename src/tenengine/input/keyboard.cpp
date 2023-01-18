@@ -1,14 +1,7 @@
 #include "input.hpp"
 
-void Keyboard::keyPress(unsigned int keyID)
-{
-    _keys[keyID] = true;
-};
-
-void Keyboard::keyRelease(unsigned int keyID)
-{
-    _keys[keyID] = false;
-};
+void Keyboard::keyPress(unsigned int keyID) { _keys[keyID] = true; };
+void Keyboard::keyRelease(unsigned int keyID) { _keys[keyID] = false; };
 
 bool Keyboard::isKeyPressed(unsigned int keyID)
 {
@@ -22,3 +15,18 @@ bool Keyboard::isKeyPressed(unsigned int keyID)
         return false;
     }
 };
+
+std::vector<unsigned int> Keyboard::getKeysPressed()
+{
+    std::vector<unsigned int> pressed;
+
+    for (auto key : _keys)
+    {
+        if (std::get<bool>(key) == true)
+        {
+            pressed.push_back(std::get<const unsigned int>(key));
+        }
+    }
+
+    return pressed;
+}

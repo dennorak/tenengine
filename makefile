@@ -27,7 +27,8 @@ TILED = $(wildcard src/tenengine/tiled/*.cpp)
 GRAPHICS = $(wildcard src/tenengine/graphics/*.cpp)
 INPUT = $(wildcard src/tenengine/input/*.cpp)
 ENTITY = $(wildcard src/tenengine/entity/*.cpp)
-ALL = $(LAUNCHER) $(ENGINE) $(TILED) $(GRAPHICS) $(INPUT) $(ENTITY)
+STATE = $(wildcard src/tenengine/state/*.cpp)
+ALL = $(LAUNCHER) $(ENGINE) $(GRAPHICS) $(ENTITY) $(TILED) $(STATE) $(INPUT)
 
 ####################
 ##### ROUTINES #####
@@ -77,4 +78,7 @@ $(call OBJ_OF, $(INPUT)): $(INPUT)
 	$(call COMPILE, $(@D), $@)
 
 $(call OBJ_OF, $(ENTITY)): $(ENTITY)
+	$(call COMPILE, $(@D), $@)
+
+$(call OBJ_OF, $(STATE)): $(STATE)
 	$(call COMPILE, $(@D), $@)

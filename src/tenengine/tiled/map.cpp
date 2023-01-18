@@ -16,7 +16,7 @@ namespace Tiled
         _layers = atlas.child("map").attribute("nextlayerid").as_int() - 1;
         _scale = atlas.child("map").child("properties")
             .find_child_by_attribute("property", "name", "scale")
-            .attribute("value").as_float();
+            .attribute("value").as_int();
         _spawnX = atlas.child("map").child("properties")
             .find_child_by_attribute("property", "name", "spawn_x")
             .attribute("value").as_int();
@@ -26,7 +26,7 @@ namespace Tiled
 
         // create the tile array
         // for more info see the creation of the _tiles array in set.cpp
-        // https://stackoverflow.com/questions/47664127/create-a-multidimensional-array-dynamically-in-c
+        // https://stackoverflo250w.com/questions/47664127/create-a-multidimensional-array-dynamically-in-c
         _tiles = (int*) calloc(_w * _h * _layers, sizeof(int));
         assert(_tiles);
         // set the tile index to 0
@@ -68,10 +68,10 @@ namespace Tiled
         }
     };
 
-    void Map::render(SDL_Rect* of, int layer, SDL_Rect* to)
+    void Map::render(SDL_Rect* of, int layer)
     {
         if (layer-1 > _layers) err("Trying to render layer out of bounds: " + std::to_string(layer));
-        SDL_RenderCopy(_renderer, _textures[layer-1], of, to);
+        SDL_RenderCopy(_renderer, _textures[layer-1], of, NULL);
     }
 
     int Map::getTileID(int layer, int tx, int ty)
@@ -84,7 +84,6 @@ namespace Tiled
     Map::~Map()
     {
         // free the tile array
-        free(_tiles);
         _tiles = NULL;
     };
 

@@ -4,7 +4,7 @@
 
 #include <string>
 #include <SDL2/SDL.h>
-
+#include <SDL2/SDL_ttf.h>
 
 class Window
 {
@@ -13,7 +13,7 @@ public:
     SDL_Renderer* getRender();
     int width();
     int height();
-    void calcFPS();
+    void calcFPS(int period);
     float getFPS();
 private:
     std::string _title;
@@ -27,11 +27,21 @@ private:
 class Camera
 {
 public:
-    Camera(int mw, int mh, float scale, int ww, int wh);
-    SDL_Rect* getViewport();
+    Camera(float scale, int w, int h, int cScale);
 
-    float getScale();
+    SDL_Rect* getViewport(float x, float y);
 private:
     SDL_Rect _rect;
-    int _ww, _wh, _scale;
+    float _cScale;
+};
+
+class Debug
+{
+public:
+    Debug(SDL_Renderer* renderer);
+    void render(float fps, float x, float y);
+private:
+    TTF_Font* _font;
+    SDL_Renderer* _renderer;
+    SDL_Rect _rect;
 };
