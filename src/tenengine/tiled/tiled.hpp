@@ -48,16 +48,16 @@ namespace Tiled
         ~Map();
 
         void render(SDL_Rect *of, int layer);
-        float getScale();
+        float scale();
         int width();
         int height();
-        int spawnX();
-        int spawnY();
+        float spawnX();
+        float spawnY();
 
         int getTileID(int layer, int tx, int ty);
     private:
-        int _w, _h, _layers, _spawnX, _spawnY;
-        float _scale;
+        int _w, _h, _layers;
+        float _scale, _spawnX, _spawnY;
         SDL_Texture *_textures[1];
         int *_tiles;
         SDL_Renderer* _renderer;

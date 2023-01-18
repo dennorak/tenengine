@@ -4,8 +4,8 @@ IState::IState(Window window, std::string mapPath):
     _window(window),
     _set(Tiled::Set(PACKPATH, _window.getRender(), TEXPATH)),
     _map(Tiled::Map(_set, mapPath, _window.getRender(), _window.width())),
-    _player(PLAYERTEX, 32, 32, _window, _map.spawnX(), _map.spawnY()),
-    _camera(_map.getScale(), _window.width(), _window.height(), _set.getSize())
+    _camera(_map.scale(), _window.width(), _window.height(), _set.getSize()),
+    _player(PLAYERTEX, _set.getSize() * scale(), _window, _map)
 {
 
 };
@@ -33,4 +33,9 @@ float IState::playerY()
 SDL_Rect* IState::getCameraViewport()
 {
     return _camera.getViewport(_player.getX(), _player.getY());
+}
+
+float IState::scale()
+{
+    return (float)_window.width()/(_map.width()*_set.getSize());
 }

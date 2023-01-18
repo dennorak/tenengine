@@ -32,9 +32,9 @@
             }
         }
     },
-    "map.height": 40,
+    "map.height": 100,
     "map.lastUsedFormat": "tmx",
-    "map.width": 60,
+    "map.width": 100,
     "openFiles": [
         "/home/idko/documents/projects/tenengine/client/assets/data/menu.tmx",
         "/home/idko/documents/projects/tenengine/client/assets/data/atlas.tsx"

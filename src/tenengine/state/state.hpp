@@ -23,12 +23,13 @@ public:
     float playerX();
     float playerY();
     SDL_Rect* getCameraViewport();
+    float scale();
 protected:
     Window _window;
     Tiled::Set _set;
     Tiled::Map _map;
-    Player _player;
     Camera _camera;
+    Player _player;
 };
 
 class LoadState: public IState

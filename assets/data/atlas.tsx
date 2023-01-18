@@ -15361,4 +15361,16 @@
    <property name="collidable" type="bool" value="false"/>
   </properties>
  </tile>
+ <wangsets>
+  <wangset name="Grass" type="mixed" tile="-1">
+   <wangcolor name="Red Flowered" color="#ff0000" tile="-1" probability="1"/>
+   <wangcolor name="Yellow Flowered" color="#00ff00" tile="-1" probability="1"/>
+   <wangtile tileid="961" wangid="1,1,1,1,1,1,1,1"/>
+   <wangtile tileid="962" wangid="1,1,1,1,1,1,1,1"/>
+   <wangtile tileid="963" wangid="1,1,1,1,1,1,1,1"/>
+   <wangtile tileid="964" wangid="1,1,1,1,1,1,1,1"/>
+   <wangtile tileid="965" wangid="1,1,1,1,1,1,1,1"/>
+   <wangtile tileid="966" wangid="1,1,1,1,1,1,1,1"/>
+  </wangset>
+ </wangsets>
 </tileset>

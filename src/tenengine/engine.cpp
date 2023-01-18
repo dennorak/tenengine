@@ -46,7 +46,7 @@ void Engine::run()
         // render block
         SDL_RenderClear(_window.getRender());
         _playStates[_playState]->render();
-        if (_showDebug) _debug.render(_window.getFPS(), px, py);
+        if (_showDebug) _debug.render(_window.getFPS(), px, py, _playStates[_playState]->scale());
         SDL_RenderPresent(_window.getRender());
 
         // update frame ctr periodically

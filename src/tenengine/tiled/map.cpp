@@ -19,10 +19,10 @@ namespace Tiled
             .attribute("value").as_int();
         _spawnX = atlas.child("map").child("properties")
             .find_child_by_attribute("property", "name", "spawn_x")
-            .attribute("value").as_int();
+            .attribute("value").as_float();
         _spawnY = atlas.child("map").child("properties")
             .find_child_by_attribute("property", "name", "spawn_y")
-            .attribute("value").as_int();
+            .attribute("value").as_float();
 
         // create the tile array
         // for more info see the creation of the _tiles array in set.cpp
@@ -87,7 +87,7 @@ namespace Tiled
         _tiles = NULL;
     };
 
-    float Map::getScale()
+    float Map::scale()
     {
         return _scale;
     };
@@ -102,12 +102,12 @@ namespace Tiled
         return _h;
     }
 
-    int Map::spawnX()
+    float Map::spawnX()
     {
         return _spawnX;
     }
 
-    int Map::spawnY()
+    float Map::spawnY()
     {
         return _spawnY;
     }

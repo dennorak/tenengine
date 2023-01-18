@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
  <properties>
-  <property name="scale" type="int" value="20"/>
-  <property name="spawn_x" type="int" value="28"/>
-  <property name="spawn_y" type="int" value="19"/>
+  <property name="scale" type="int" value="15"/>
+  <property name="spawn_x" type="float" value="28.5"/>
+  <property name="spawn_y" type="float" value="19.5"/>
  </properties>
  <tileset firstgid="1" source="atlas.tsx"/>
  <layer id="1" name="Tile Layer 1" width="60" height="40">

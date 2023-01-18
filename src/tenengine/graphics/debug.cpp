@@ -10,10 +10,11 @@ Debug::Debug(SDL_Renderer* renderer):
     _rect.h = 200;
 }
 
-void Debug::render(float fps, float x, float y)
+void Debug::render(float fps, float x, float y, float scale)
 {
     std::string dString = "FPS: " + std::to_string((int)fps) +
-    "\nX: " + std::to_string(x) + "\nY: " + std::to_string(y);
+    "\nX: " + std::to_string(x) + "\nY: " + std::to_string(y) + 
+    "\nScale: " + std::to_string(scale);
 
     SDL_Surface* surface = TTF_RenderUTF8_Solid_Wrapped(
         _font, 

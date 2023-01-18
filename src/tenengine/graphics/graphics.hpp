@@ -30,16 +30,17 @@ public:
     Camera(float scale, int w, int h, int cScale);
 
     SDL_Rect* getViewport(float x, float y);
+    float getAR();
 private:
     SDL_Rect _rect;
-    float _cScale;
+    float _cScale, _ar;
 };
 
 class Debug
 {
 public:
     Debug(SDL_Renderer* renderer);
-    void render(float fps, float x, float y);
+    void render(float fps, float x, float y, float scale);
 private:
     TTF_Font* _font;
     SDL_Renderer* _renderer;
